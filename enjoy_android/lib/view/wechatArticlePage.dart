@@ -12,24 +12,42 @@ class WechatArticleState extends State<WechatArticlePage> with SingleTickerProvi
   @override
   void initState() {
     super.initState();
-
+    _tabCtrl = TabController(
+        length:4, vsync: this, initialIndex: 0);
   }
 
   @override
   Widget build(BuildContext context) {
 
     getWeChatArticle();
-
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text("公众号"),
-          backgroundColor: Color.fromARGB(255, 119, 136, 213), //设置appbar背景颜色
-          centerTitle: true, //设置标题是否局中
-        ),
-        body: new Center(
-          child: new Text('微信公众号'),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("公众号"),
+        backgroundColor: Color.fromARGB(255, 119, 136, 213), //设置appbar背景颜色
+        centerTitle: true, //设置标题是否局中
+      ),
+      body: Column(
+        children: <Widget>[
+          TabBar(
+            indicatorColor: Colors.deepPurpleAccent,
+            controller: _tabCtrl,
+            isScrollable: true,
+            tabs: [
+              Tab(
+                text: '大神',
+              ),
+              Tab(
+                text: '小弟',
+              ),
+              Tab(
+                text: '花花',
+              ),
+              Tab(
+                text: '草草',
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -42,5 +60,17 @@ class WechatArticleState extends State<WechatArticlePage> with SingleTickerProvi
     } catch (e) {
       return print(e);
     }
+  }
+
+  List<Widget> _parseTabs() {
+    List<Widget> widgets = List();
+    /*var children = widget.knowledge.children;
+    for (KnowledgeSystem item in children) {
+      var tab = Tab(
+        text: item.name,
+      );
+      widgets.add(tab);
+    }*/
+    return widgets;
   }
 }
