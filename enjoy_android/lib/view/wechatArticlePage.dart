@@ -6,7 +6,15 @@ class WechatArticlePage extends StatefulWidget {
   WechatArticleState createState() => new WechatArticleState();
 }
 
-class WechatArticleState extends State<WechatArticlePage> {
+class WechatArticleState extends State<WechatArticlePage> with SingleTickerProviderStateMixin{
+  TabController _tabCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
 
