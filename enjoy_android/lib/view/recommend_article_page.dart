@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// 推荐文章页
 class RecommendArticlePage extends StatefulWidget {
   @override
   RecommendArticlePageState createState() => new RecommendArticlePageState();

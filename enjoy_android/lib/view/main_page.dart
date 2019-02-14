@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:enjoy_android/view/recommend_article_page.dart';
 import 'package:enjoy_android/view/project_practice_page.dart';
 import 'package:enjoy_android/view/wechat_article_page.dart';
-import 'package:enjoy_android/utils/color.dart';
+import 'package:enjoy_android/constant/color.dart';
 
 class App extends StatefulWidget {
   @override

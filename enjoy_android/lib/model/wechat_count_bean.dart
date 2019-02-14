@@ -67,4 +67,12 @@ class Data {
     data['visible'] = this.visible;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'courseId：${courseId}'
+          + 'id: ${id}'
+          + 'name: ${name}'
+          + 'order: ${order}';
+  }
 }
