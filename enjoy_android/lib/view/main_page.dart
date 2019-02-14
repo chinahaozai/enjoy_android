@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:enjoy_android/view/recommendArticlePage.dart';
-import 'package:enjoy_android/view/projectPracticePage.dart';
-import 'package:enjoy_android/view/wechatArticlePage.dart';
+import 'package:enjoy_android/view/recommend_article_page.dart';
+import 'package:enjoy_android/view/project_practice_page.dart';
+import 'package:enjoy_android/view/wechat_article_page.dart';
 import 'package:enjoy_android/utils/color.dart';
 
 class App extends StatefulWidget {
