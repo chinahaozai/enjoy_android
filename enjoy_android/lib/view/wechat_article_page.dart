@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'dart:convert';
 import 'package:enjoy_android/model/wechat_count_bean.dart';
 import 'package:enjoy_android/widget/async_snapshot_widget.dart';
+import 'package:enjoy_android/view/wechat_article_list_page.dart';
 
 /// 微信公众号页
 class WechatArticlePage extends StatefulWidget {
@@ -45,10 +45,16 @@ class WechatArticleState extends State<WechatArticlePage>
                 TabBar(
                   indicatorColor: Colors.deepPurpleAccent,
                   labelColor: Colors.black87,
-                  unselectedLabelColor: Colors.amberAccent,
+                  unselectedLabelColor: Colors.black45,
                   controller: _tabCtrl,
                   isScrollable: true,
                   tabs: _createTabs(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: TabBarView(
+                    controller: _tabCtrl,
+                    children: _createPages(snapshot.data)),
                 )
               ],
             ),
@@ -77,6 +83,15 @@ class WechatArticleState extends State<WechatArticlePage>
         text: item,
       );
       widgets.add(tab);
+    }
+    return widgets;
+  }
+
+  List<Widget> _createPages(List<Data> list){
+    List<Widget> widgets = List();
+    for (Data item in list) {
+      var page = WechatArticleListPage(cid: item.id);
+      widgets.add(page);
     }
     return widgets;
   }
