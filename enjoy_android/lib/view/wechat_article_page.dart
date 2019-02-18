@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:enjoy_android/model/wechat_count_bean.dart';
 import 'package:enjoy_android/widget/async_snapshot_widget.dart';
 import 'package:enjoy_android/view/wechat_article_list_page.dart';
+import 'package:enjoy_android/manager/api_manager.dart';
 
 /// 微信公众号页
 class WechatArticlePage extends StatefulWidget {
@@ -22,7 +22,7 @@ class WechatArticleState extends State<WechatArticlePage>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(builder: _buildFuture, future: getWeChatCount());
+    return FutureBuilder(builder: _buildFuture, future: ApiManager().getWechatCount());
   }
 
   Widget _buildFuture(BuildContext context, AsyncSnapshot<List<WechatCount>> snapshot) {
@@ -62,17 +62,6 @@ class WechatArticleState extends State<WechatArticlePage>
         }
       },
     );
-  }
-
-  /// 网络请求 获取推荐微信公众号
-  Future<List<WechatCount>> getWeChatCount() async {
-    try {
-      Response response;
-      response = await Dio().get("http://wanandroid.com/wxarticle/chapters/json");
-      return WechatCountBean.fromJson(response.data).data;
-    } catch (e) {
-      return null;
-    }
   }
 
   /// 生成顶部tab
