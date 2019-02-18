@@ -1,16 +1,16 @@
-/// 微信公众号实体
-class WechatCountBean {
-  List<WechatCount> data;
+
+class ProjectClassifyBean {
+  List<ProjectClassify> data;
   int errorCode;
   String errorMsg;
 
-  WechatCountBean({this.data, this.errorCode, this.errorMsg});
+  ProjectClassifyBean({this.data, this.errorCode, this.errorMsg});
 
-  WechatCountBean.fromJson(Map<String, dynamic> json) {
+  ProjectClassifyBean.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<WechatCount>();
+      data = new List<ProjectClassify>();
       json['data'].forEach((v) {
-        data.add(new WechatCount.fromJson(v));
+        data.add(new ProjectClassify.fromJson(v));
       });
     }
     errorCode = json['errorCode'];
@@ -28,7 +28,7 @@ class WechatCountBean {
   }
 }
 
-class WechatCount {
+class ProjectClassify {
   int courseId;
   int id;
   String name;
@@ -37,16 +37,16 @@ class WechatCount {
   bool userControlSetTop;
   int visible;
 
-  WechatCount(
+  ProjectClassify(
       {this.courseId,
-      this.id,
-      this.name,
-      this.order,
-      this.parentChapterId,
-      this.userControlSetTop,
-      this.visible});
+        this.id,
+        this.name,
+        this.order,
+        this.parentChapterId,
+        this.userControlSetTop,
+        this.visible});
 
-  WechatCount.fromJson(Map<String, dynamic> json) {
+  ProjectClassify.fromJson(Map<String, dynamic> json) {
     courseId = json['courseId'];
     id = json['id'];
     name = json['name'];
@@ -66,13 +66,5 @@ class WechatCount {
     data['userControlSetTop'] = this.userControlSetTop;
     data['visible'] = this.visible;
     return data;
-  }
-
-  @override
-  String toString() {
-    return 'courseId：${courseId}'
-          + 'id: ${id}'
-          + 'name: ${name}'
-          + 'order: ${order}';
   }
 }

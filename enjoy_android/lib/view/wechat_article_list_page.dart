@@ -19,7 +19,7 @@ class WechatArticleListPage extends StatefulWidget {
 class _WechatArticleListState extends State<WechatArticleListPage> with AutomaticKeepAliveClientMixin {
 
   int index = 1;
-  List<Datas> articles = List();
+  List<Article> articles = List();
 
 
   @override
@@ -46,21 +46,21 @@ class _WechatArticleListState extends State<WechatArticleListPage> with Automati
     if(articles.length == 0) {
       items.add(new Padding(padding: new EdgeInsets.all(20.0), child: new Text('${widget.cid}')));
     } else {
-      for(Datas datas in articles) {
-        items.add(new Padding(padding: new EdgeInsets.all(20.0), child: new Text(datas.title)));
+      for(Article article in articles) {
+        items.add(new Padding(padding: new EdgeInsets.all(20.0), child: new Text(article.title)));
       }
     }
 
     return items;
   }
 
-  Widget getRow(Datas data){
+  Widget getRow(Article article){
     return new GestureDetector(
       child: new Padding(
           padding: new EdgeInsets.all(15.0),
-          child: new Text(data.title)),
+          child: new Text(article.title)),
       onTap: () {
-        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: data.title, url: data.link)));
+        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: article.title, url: article.link)));
       },
     );
   }

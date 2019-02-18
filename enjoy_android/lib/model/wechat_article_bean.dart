@@ -1,12 +1,12 @@
 class WechatArticleBean {
-  Data data;
+  WechatArticle data;
   int errorCode;
   String errorMsg;
 
   WechatArticleBean({this.data, this.errorCode, this.errorMsg});
 
   WechatArticleBean.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new WechatArticle.fromJson(json['data']) : null;
     errorCode = json['errorCode'];
     errorMsg = json['errorMsg'];
   }
@@ -22,16 +22,16 @@ class WechatArticleBean {
   }
 }
 
-class Data {
+class WechatArticle {
   int curPage;
-  List<Datas> datas;
+  List<Article> datas;
   int offset;
   bool over;
   int pageCount;
   int size;
   int total;
 
-  Data(
+  WechatArticle(
       {this.curPage,
         this.datas,
         this.offset,
@@ -40,12 +40,12 @@ class Data {
         this.size,
         this.total});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  WechatArticle.fromJson(Map<String, dynamic> json) {
     curPage = json['curPage'];
     if (json['datas'] != null) {
-      datas = new List<Datas>();
+      datas = new List<Article>();
       json['datas'].forEach((v) {
-        datas.add(new Datas.fromJson(v));
+        datas.add(new Article.fromJson(v));
       });
     }
     offset = json['offset'];
@@ -70,7 +70,7 @@ class Data {
   }
 }
 
-class Datas {
+class Article {
   String apkLink;
   String author;
   int chapterId;
@@ -95,7 +95,7 @@ class Datas {
   int visible;
   int zan;
 
-  Datas(
+  Article(
       {this.apkLink,
         this.author,
         this.chapterId,
@@ -120,7 +120,7 @@ class Datas {
         this.visible,
         this.zan});
 
-  Datas.fromJson(Map<String, dynamic> json) {
+  Article.fromJson(Map<String, dynamic> json) {
     apkLink = json['apkLink'];
     author = json['author'];
     chapterId = json['chapterId'];

@@ -25,7 +25,7 @@ class WechatArticleState extends State<WechatArticlePage>
     return FutureBuilder(builder: _buildFuture, future: getWeChatCount());
   }
 
-  Widget _buildFuture(BuildContext context, AsyncSnapshot<List<Data>> snapshot) {
+  Widget _buildFuture(BuildContext context, AsyncSnapshot<List<WechatCount>> snapshot) {
     return AsyncSnapshotWidget(
       snapshot: snapshot,
       successWidget: (snapshot) {
@@ -64,7 +64,7 @@ class WechatArticleState extends State<WechatArticlePage>
     );
   }
 
-  Future<List<Data>> getWeChatCount() async {
+  Future<List<WechatCount>> getWeChatCount() async {
     try {
       Response response;
       response = await Dio().get("http://wanandroid.com/wxarticle/chapters/json");
@@ -87,20 +87,20 @@ class WechatArticleState extends State<WechatArticlePage>
     return widgets;
   }
 
-  List<Widget> _createPages(List<Data> list){
+  List<Widget> _createPages(List<WechatCount> list){
     List<Widget> widgets = List();
-    for (Data item in list) {
-      var page = WechatArticleListPage(cid: item.id);
+    for (WechatCount count in list) {
+      var page = WechatArticleListPage(cid: count.id);
       widgets.add(page);
     }
     return widgets;
   }
 
   /// 解析微信公众号列表
-  void _parseWeChatCounts(List<Data> wxCounts){
+  void _parseWeChatCounts(List<WechatCount> wxCounts){
     _tabsName.clear();
-    for(Data data in wxCounts){
-      _tabsName.add(data.name);
+    for(WechatCount count in wxCounts){
+      _tabsName.add(count.name);
     }
   }
 }
