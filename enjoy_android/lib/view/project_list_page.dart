@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:enjoy_android/model/wechat_article_bean.dart';
+import 'package:enjoy_android/model/project_list_bean.dart';
 import 'package:dio/dio.dart';
 import 'package:enjoy_android/view/webview_page.dart';
 
@@ -19,7 +19,7 @@ class ProjectListPage extends StatefulWidget {
 class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveClientMixin {
 
   int index = 1;
-  List<Article> articles = List();
+  List<Project> projects = List();
 
 
   @override
@@ -32,33 +32,32 @@ class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveCl
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    //return ListView(children: getItems());
     return ListView.builder(
-      itemCount: articles.length,
+      itemCount: projects.length,
       itemBuilder: (BuildContext context, int position){
-        return getRow(articles[position]);
+        return getRow(projects[position]);
       },
     );
   }
 
-  Widget getRow(Article article){
+  Widget getRow(Project project){
     return new GestureDetector(
       child: new Padding(
           padding: new EdgeInsets.all(15.0),
-          child: new Text(article.title)),
+          child: new Text(project.title)),
       onTap: () {
-        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: article.title, url: article.link)));
+        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: project.title, url: project.link)));
       },
     );
   }
 
   void getList() async {
-    await Dio().get("http://www.wanandroid.com/project/list/1/json", queryParameters: {"cid": widget.cid})
+    await Dio().get("http://www.wanandroid.com/project/list/1/json", queryParameters: {"cid": "${widget.cid}"})
         .then((response){
           if(response != null){
-            var wechatArticleBean = WechatArticleBean.fromJson(response.data);
+            var projectListBean = ProjectListBean.fromJson(response.data);
             setState(() {
-              articles.addAll(wechatArticleBean.data.datas);
+              projects.addAll(projectListBean.data.datas);
             });
           }
     });

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:enjoy_android/view/recommend_article_page.dart';
+import 'package:enjoy_android/view/home_page.dart';
 import 'package:enjoy_android/view/project_practice_page.dart';
 import 'package:enjoy_android/view/wechat_article_page.dart';
-import 'package:enjoy_android/constant/color.dart';
 
 class App extends StatefulWidget {
   @override
@@ -35,7 +34,7 @@ class AppState extends State<App> with TickerProviderStateMixin {
           controller: _pageCtr,
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
-            RecommendArticlePage(),
+            HomePage(),
             ProjectPracticePage(),
             WechatArticlePage(),
           ],

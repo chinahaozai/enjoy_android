@@ -92,7 +92,7 @@ class _ProjectPracticeState extends State<ProjectPracticePage> with SingleTicker
     return widgets;
   }
 
-  /// 解析微信公众号列表
+  /// 解析项目列表
   void _parseWeChatCounts(List<ProjectClassify> projectClassify){
     _tabsName.clear();
     for(ProjectClassify project in projectClassify){
