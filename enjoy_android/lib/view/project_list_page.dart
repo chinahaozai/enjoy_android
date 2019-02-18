@@ -3,20 +3,20 @@ import 'package:enjoy_android/model/wechat_article_bean.dart';
 import 'package:dio/dio.dart';
 import 'package:enjoy_android/view/webview_page.dart';
 
-/// 微信文章列表页
-class WechatArticleListPage extends StatefulWidget {
+/// 项目列表页
+class ProjectListPage extends StatefulWidget {
   int cid = 0;
 
-  WechatArticleListPage({@required this.cid});
+  ProjectListPage({@required this.cid});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _WechatArticleListState();
+    return _ProjectListState();
   }
 }
 
-class _WechatArticleListState extends State<WechatArticleListPage> with AutomaticKeepAliveClientMixin {
+class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveClientMixin {
 
   int index = 1;
   List<Article> articles = List();
@@ -41,7 +41,6 @@ class _WechatArticleListState extends State<WechatArticleListPage> with Automati
     );
   }
 
-  /// 创建列表行
   Widget getRow(Article article){
     return new GestureDetector(
       child: new Padding(
@@ -53,9 +52,8 @@ class _WechatArticleListState extends State<WechatArticleListPage> with Automati
     );
   }
 
-  /// 网络请求，获取微信文章列表
   void getList() async {
-    await Dio().get("http://wanandroid.com/wxarticle/list/${widget.cid}/1/json")
+    await Dio().get("http://www.wanandroid.com/project/list/1/json", queryParameters: {"cid": widget.cid})
         .then((response){
           if(response != null){
             var wechatArticleBean = WechatArticleBean.fromJson(response.data);

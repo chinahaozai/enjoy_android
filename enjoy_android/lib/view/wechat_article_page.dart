@@ -64,6 +64,7 @@ class WechatArticleState extends State<WechatArticlePage>
     );
   }
 
+  /// 网络请求 获取推荐微信公众号
   Future<List<WechatCount>> getWeChatCount() async {
     try {
       Response response;
@@ -87,6 +88,7 @@ class WechatArticleState extends State<WechatArticlePage>
     return widgets;
   }
 
+  /// 创建微信文章列表页
   List<Widget> _createPages(List<WechatCount> list){
     List<Widget> widgets = List();
     for (WechatCount count in list) {
