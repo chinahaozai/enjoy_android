@@ -1,15 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:enjoy_android/model/home_banner_bean.dart';
-import 'package:enjoy_android/model/home_article_bean.dart';
 import 'package:dio/dio.dart';
-import 'package:enjoy_android/manager/api_manager.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:enjoy_android/constant/color_const.dart';
 import 'package:enjoy_android/constant/textsize_const.dart';
-import 'package:enjoy_android/view/webview_page.dart';
+import 'package:enjoy_android/manager/api_manager.dart';
+import 'package:enjoy_android/model/home_article_bean.dart';
+import 'package:enjoy_android/model/home_banner_bean.dart';
+import 'package:enjoy_android/widget/item_home_article.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 /// 首页
 class HomePage extends StatefulWidget {
+
+  /*BuildContext mainContext;
+  HomePage(this.mainContext);*/
+
   @override
   HomePageState createState() => HomePageState();
 }
@@ -36,8 +40,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("推荐文章"),
           backgroundColor: Color.fromARGB(255, 119, 136, 213), //设置appbar背景颜色
@@ -48,9 +51,8 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
             itemBuilder: (context, index) {
               return index == 0
                   ? createBannerItem()
-                  : createArticleItem(articles[index - 1]);
+                  : HomeArticleItem(articles[index - 1]);
             }),
-      ),
     );
   }
 
@@ -80,18 +82,6 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
         width: 0,
         height: 0,
       ),
-    );
-  }
-
-  /// 创建文章列表条目
-  Widget createArticleItem(Article article){
-    return GestureDetector(
-      child: Padding(
-          padding: EdgeInsets.all(15.0),
-          child: Text(article.title)),
-      onTap: () {
-        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: article.title, url: article.link)));
-      },
     );
   }
 

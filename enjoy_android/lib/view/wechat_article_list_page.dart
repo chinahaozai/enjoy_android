@@ -16,7 +16,7 @@ class WechatArticleListPage extends StatefulWidget {
   }
 }
 
-class _WechatArticleListState extends State<WechatArticleListPage> with AutomaticKeepAliveClientMixin {
+class _WechatArticleListState extends State<WechatArticleListPage> with SingleTickerProviderStateMixin {
 
   int index = 1;
   List<Article> articles = List();
@@ -46,7 +46,11 @@ class _WechatArticleListState extends State<WechatArticleListPage> with Automati
     return new GestureDetector(
       child: new Padding(
           padding: new EdgeInsets.all(15.0),
-          child: new Text(article.title)),
+          child: new Text(
+            article.title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          )),
       onTap: () {
         Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: article.title, url: article.link)));
       },
