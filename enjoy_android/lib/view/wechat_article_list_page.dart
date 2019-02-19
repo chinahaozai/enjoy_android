@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:enjoy_android/model/wechat_article_bean.dart';
-import 'package:dio/dio.dart';
 import 'package:enjoy_android/view/webview_page.dart';
+import 'package:enjoy_android/manager/api_manager.dart';
 
 /// 微信文章列表页
 class WechatArticleListPage extends StatefulWidget {
@@ -55,7 +55,7 @@ class _WechatArticleListState extends State<WechatArticleListPage> with Automati
 
   /// 网络请求，获取微信文章列表
   void getList() async {
-    await Dio().get("http://wanandroid.com/wxarticle/list/${widget.cid}/1/json")
+    await ApiManager().getWechatArticle(widget.cid, index)
         .then((response){
           if(response != null){
             var wechatArticleBean = WechatArticleBean.fromJson(response.data);

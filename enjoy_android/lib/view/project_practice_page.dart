@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:enjoy_android/manager/api_manager.dart';
 import 'package:enjoy_android/model/project_classify_bean.dart';
 import 'package:enjoy_android/widget/async_snapshot_widget.dart';
 import 'package:enjoy_android/view/project_list_page.dart';
@@ -62,7 +63,7 @@ class _ProjectPracticeState extends State<ProjectPracticePage> with SingleTicker
   Future<List<ProjectClassify>> getProjectClassify() async {
     try {
       Response response;
-      response = await Dio().get("http://www.wanandroid.com/project/tree/json");
+      response = await ApiManager().getProjectClassify();
       return ProjectClassifyBean.fromJson(response.data).data;
     } catch (e) {
       return null;

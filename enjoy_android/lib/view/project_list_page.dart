@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:enjoy_android/manager/api_manager.dart';
 import 'package:enjoy_android/model/project_list_bean.dart';
-import 'package:dio/dio.dart';
 import 'package:enjoy_android/view/webview_page.dart';
+import 'package:flutter/material.dart';
 
 /// 项目列表页
 class ProjectListPage extends StatefulWidget {
@@ -51,8 +51,9 @@ class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveCl
     );
   }
 
+  /// 获取项目列表
   void getList() async {
-    await Dio().get("http://www.wanandroid.com/project/list/1/json", queryParameters: {"cid": "${widget.cid}"})
+    await ApiManager().getProjectList(widget.cid, index)
         .then((response){
           if(response != null){
             var projectListBean = ProjectListBean.fromJson(response.data);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:enjoy_android/model/home_banner_bean.dart';
 import 'package:enjoy_android/model/home_article_bean.dart';
 import 'package:dio/dio.dart';
+import 'package:enjoy_android/manager/api_manager.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:enjoy_android/constant/color_const.dart';
 import 'package:enjoy_android/constant/textsize_const.dart';
@@ -129,8 +130,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   /// 获取首页banner数据
   void getBanner() async {
-    Response response =
-        await Dio().get("http://www.wanandroid.com/banner/json");
+    Response response = await ApiManager().getHomeBanner();
     var homeBannerBean = HomeBannerBean.fromJson(response.data);
     setState(() {
       banners.clear();
@@ -140,8 +140,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   /// 获取首页推荐文章数据
   void getList() async {
-    Response response =
-        await Dio().get("http://www.wanandroid.com/article/list/${index}/json");
+    Response response = await ApiManager().getHomeArticle(index);
     var homeArticleBean = HomeArticleBean.fromJson(response.data);
     setState(() {
       articles.clear();
