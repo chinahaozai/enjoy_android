@@ -1,6 +1,7 @@
 import 'package:enjoy_android/manager/api_manager.dart';
 import 'package:enjoy_android/model/project_list_bean.dart';
 import 'package:enjoy_android/view/webview_page.dart';
+import 'package:enjoy_android/widget/item_project.dart';
 import 'package:flutter/material.dart';
 
 /// 项目列表页
@@ -35,18 +36,7 @@ class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveCl
     return ListView.builder(
       itemCount: projects.length,
       itemBuilder: (BuildContext context, int position){
-        return getRow(projects[position]);
-      },
-    );
-  }
-
-  Widget getRow(Project project){
-    return new GestureDetector(
-      child: new Padding(
-          padding: new EdgeInsets.all(15.0),
-          child: new Text(project.title)),
-      onTap: () {
-        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: project.title, url: project.link)));
+        return ProjectItem(projects[position]);
       },
     );
   }

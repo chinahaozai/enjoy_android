@@ -10,10 +10,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 
 /// 首页
 class HomePage extends StatefulWidget {
-
-  /*BuildContext mainContext;
-  HomePage(this.mainContext);*/
-
   @override
   HomePageState createState() => HomePageState();
 }
@@ -25,63 +21,84 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   // 首页文章列表
   List<Article> articles = List();
 
-  SwiperController _controller = SwiperController();
+  // banner 控制器
+  SwiperController _bannerController = SwiperController();
+  ScrollController _scrollController = ScrollController();
 
   //  请求首页文章页码
-  int index = 0;
+  int curPage = 0;
 
   @override
   void initState() {
     super.initState();
     getBanner();
-    getList();
-    _controller.autoplay = true;
+    getList(false);
+    _bannerController.autoplay = true;
+
+    _scrollController.addListener((){
+      var maxScroll = _scrollController.position.maxScrollExtent;
+      var pixels = _scrollController.position.pixels;
+      if(maxScroll == pixels){
+        curPage++;
+        getList(true);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    Widget listView = ListView.builder(
+      itemCount: articles.length + 1,
+      itemBuilder: (context, index) {
+        return index == 0
+            ? createBannerItem()
+            : HomeArticleItem(articles[index - 1]);
+      },
+      controller: _scrollController,
+    );
     return Scaffold(
-        appBar: AppBar(
-          title: Text("推荐文章"),
-          backgroundColor: Color.fromARGB(255, 119, 136, 213), //设置appbar背景颜色
-          centerTitle: true, //设置标题是否局中
-        ),
-        body: ListView.builder(
-            itemCount: articles.length + 1,
-            itemBuilder: (context, index) {
-              return index == 0
-                  ? createBannerItem()
-                  : HomeArticleItem(articles[index - 1]);
-            }),
+      appBar: AppBar(
+        title: Text("推荐文章"),
+        backgroundColor: Color.fromARGB(255, 119, 136, 213), //设置appbar背景颜色
+        centerTitle: true, //设置标题是否局中
+      ),
+      body: RefreshIndicator(child: listView, onRefresh: _pullToRefresh)
     );
   }
 
+  Future<Null> _pullToRefresh() async {
+    curPage = 0;
+    await getList(false);
+    return null;
+  }
+
   /// 创建banner条目
-  Widget createBannerItem(){
+  Widget createBannerItem() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 180,
       child: banners.length != 0
           ? Swiper(
-        autoplayDelay: 3500,
-        controller: _controller,
-        itemWidth: MediaQuery.of(context).size.width,
-        itemHeight: 180,
-        pagination: pagination(),
-        itemBuilder: (BuildContext context, int index) {
-          return new Image.network(
-            banners[index].imagePath,
-            fit: BoxFit.fill,
-          );
-        },
-        itemCount: banners.length,
-        viewportFraction: 0.8,
-        scale: 0.9,
-      )
+              autoplayDelay: 3500,
+              controller: _bannerController,
+              itemWidth: MediaQuery.of(context).size.width,
+              itemHeight: 180,
+              pagination: pagination(),
+              itemBuilder: (BuildContext context, int index) {
+                return new Image.network(
+                  banners[index].imagePath,
+                  fit: BoxFit.fill,
+                );
+              },
+              itemCount: banners.length,
+              viewportFraction: 0.8,
+              scale: 0.9,
+            )
           : SizedBox(
-        width: 0,
-        height: 0,
-      ),
+              width: 0,
+              height: 0,
+            ),
     );
   }
 
@@ -98,8 +115,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
               Text(
                 "${banners[config.activeIndex].title}",
                 style: TextStyle(
-                    fontSize: TextSizeConst.smallTextSize,
-                    color: Colors.white),
+                    fontSize: TextSizeConst.smallTextSize, color: Colors.white),
               ),
               Expanded(
                 flex: 1,
@@ -129,12 +145,17 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   }
 
   /// 获取首页推荐文章数据
-  void getList() async {
-    Response response = await ApiManager().getHomeArticle(index);
+  Future<Null> getList(bool loadMore) async {
+    Response response = await ApiManager().getHomeArticle(curPage);
     var homeArticleBean = HomeArticleBean.fromJson(response.data);
     setState(() {
-      articles.clear();
-      articles.addAll(homeArticleBean.data.datas);
+      if(loadMore){
+        articles.addAll(homeArticleBean.data.datas);
+      } else {
+        articles.clear();
+        articles.addAll(homeArticleBean.data.datas);
+      }
+
     });
   }
 

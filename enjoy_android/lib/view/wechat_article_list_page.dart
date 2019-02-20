@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:enjoy_android/model/wechat_article_bean.dart';
 import 'package:enjoy_android/view/webview_page.dart';
 import 'package:enjoy_android/manager/api_manager.dart';
+import 'package:enjoy_android/widget/item_wechat_article.dart';
 
 /// 微信文章列表页
 class WechatArticleListPage extends StatefulWidget {
@@ -36,23 +37,7 @@ class _WechatArticleListState extends State<WechatArticleListPage> with SingleTi
     return ListView.builder(
       itemCount: articles.length,
       itemBuilder: (BuildContext context, int position){
-        return getRow(articles[position]);
-      },
-    );
-  }
-
-  /// 创建列表行
-  Widget getRow(Article article){
-    return new GestureDetector(
-      child: new Padding(
-          padding: new EdgeInsets.all(15.0),
-          child: new Text(
-            article.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          )),
-      onTap: () {
-        Navigator.push(context, new MaterialPageRoute(builder: (context)=> WebViewPage(title: article.title, url: article.link)));
+        return WechatArticleItem(articles[position]);
       },
     );
   }
