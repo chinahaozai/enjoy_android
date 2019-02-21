@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:enjoy_android/constant/color_const.dart';
 import 'package:enjoy_android/constant/textsize_const.dart';
 import 'package:enjoy_android/manager/api_manager.dart';
 import 'package:enjoy_android/model/home_article_bean.dart';
@@ -123,7 +122,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                   alignment: Alignment.centerRight,
                   child: new DotSwiperPaginationBuilder(
                           color: Colors.white70,
-                          activeColor: ColorConst.color_primary,
+                          activeColor: Colors.green,
                           size: 6.0,
                           activeSize: 6.0)
                       .build(context, config),

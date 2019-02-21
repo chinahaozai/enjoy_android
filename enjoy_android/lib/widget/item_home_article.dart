@@ -37,9 +37,9 @@ class _HomeArticleState extends State<HomeArticleItem> {
                 Row(
                   children: <Widget>[
                     Icon(
-                      Icons.device_hub,
+                      Icons.child_care,
                       color: Colors.blueAccent,
-                      size: 15,
+                      size: 18,
                     ),
                     Expanded(
                         flex: 1,
@@ -59,7 +59,7 @@ class _HomeArticleState extends State<HomeArticleItem> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
-                      widget.article.title,
+                      widget.article.title.replaceAll("&rdquo;", "").replaceAll("&ldquo;", ""),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

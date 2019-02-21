@@ -37,7 +37,7 @@ class _WechatArticleState extends State<WechatArticleItem> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Text(
-                  widget.article.title,
+                  widget.article.title.replaceAll("&rdquo;", "").replaceAll("&ldquo;", ""),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
