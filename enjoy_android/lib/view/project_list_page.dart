@@ -12,7 +12,6 @@ class ProjectListPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _ProjectListState();
   }
 }
@@ -25,14 +24,12 @@ class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveCl
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getList();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return ListView.builder(
       itemCount: projects.length,
       itemBuilder: (BuildContext context, int position){
@@ -56,7 +53,6 @@ class _ProjectListState extends State<ProjectListPage> with AutomaticKeepAliveCl
 
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
 }

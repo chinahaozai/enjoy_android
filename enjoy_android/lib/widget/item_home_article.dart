@@ -10,7 +10,6 @@ class HomeArticleItem extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _HomeArticleState();
   }
 }
@@ -19,7 +18,6 @@ class _HomeArticleState extends State<HomeArticleItem> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return GestureDetector(
       onTap: () {
         Navigator.push(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:enjoy_android/model/wechat_article_bean.dart';
-import 'package:enjoy_android/view/webview_page.dart';
 import 'package:enjoy_android/manager/api_manager.dart';
 import 'package:enjoy_android/widget/item_wechat_article.dart';
 
@@ -12,7 +11,6 @@ class WechatArticleListPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _WechatArticleListState();
   }
 }
@@ -25,15 +23,12 @@ class _WechatArticleListState extends State<WechatArticleListPage> with SingleTi
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getList();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    //return ListView(children: getItems());
     return ListView.builder(
       itemCount: articles.length,
       itemBuilder: (BuildContext context, int position){
@@ -57,7 +52,6 @@ class _WechatArticleListState extends State<WechatArticleListPage> with SingleTi
 
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
 }

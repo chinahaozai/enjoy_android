@@ -6,7 +6,6 @@ import 'package:enjoy_android/view/wechat_article_page.dart';
 class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return AppState();
   }
 }
@@ -27,7 +26,6 @@ class AppState extends State<App> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       home: Scaffold(
         body: PageView(

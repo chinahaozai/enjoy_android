@@ -11,7 +11,6 @@ class WechatArticleItem extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _WechatArticleState();
   }
 }
@@ -19,7 +18,6 @@ class WechatArticleItem extends StatefulWidget {
 class _WechatArticleState extends State<WechatArticleItem> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return GestureDetector(
       onTap: () {
         Navigator.push(
